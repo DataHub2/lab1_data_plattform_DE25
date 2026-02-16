@@ -1,0 +1,4 @@
+# This installation file is used to specify the dependencies for the project.
+pandas>=2.0.0
+jupyter>=1.0.0
+numpy>=1.24.0
