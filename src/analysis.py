@@ -20,8 +20,22 @@ def main():
     
     print(f" Found {len(df)} rows")
 
-if __name__ == "__main__":
-    main()
+
+    # cleaning tha data 
+    # There is a risk that pandas reads the price as a string, If there is a sign that makes it look wierd. So i will manipulate the price column to make sure it is in the correct format.
+    df['price'] = pd.to_numeric(df['price'], errors='coerce')
+
+    # i would also like to flag data.
+    df['luxury_item'] = df['price'] > 1000 # Expensive items
+    df['zero_price'] = df['price'] == 0 # item is free?
+    df['missing_currency'] = df['currency'].isna() # missing currency 
+
+
+
+    
+    
+
+
 
 
 
