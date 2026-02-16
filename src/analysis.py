@@ -30,29 +30,42 @@ def main():
     df['zero_price'] = df['price'] == 0 # item is free?
     df['missing_currency'] = df['currency'].isna() # missing currency
 
-    # Filtering data 
-    # The price can not me minus
-    df = df[df['price'] >= 0]
+    # Calculating statistics on raw data before cleaning.
+    # We need to do this now, because later we will drop the empty rows.
+    count_missing_price = df['price'].isna().sum()
+    count_total_products = len(df)
 
     # i can not analyise data that is missing price, so i will be deleting rows that are empty
-    #
+    # Also removing negative prices, if there are any.
     df_clean = df.dropna(subset=['price'])
-
+    df_clean = df_clean[df_clean['price'] >= 0] 
     
     print(f"amount of rows after cleaning: {len(df_clean)}")
-
-
+   
+   
     # Saving my results
-    
     print("Calculating summary of the statistics")
     
     # Here i am calculating the mean 
+    # Here i am calculating the mean 
     summary_data = {
-        "mean_price": [df_clean['price']. mean()], #average price
+        "mean_price": [df_clean['price'].mean()], # average price
         "median_price": [df_clean['price'].median()], # median price
-        "total_products": [len(df)], # the total number of products in the original data
-        "missing_price_count": [df['price'].isna().sum()] # the number of products that are missing price 
+        "total_products": [count_total_products], # total number of products before cleaning
+        "missing_price_count": [count_missing_price] # number of products with missing price
     }
+
+    
+
+    # saving the summary data to a csv file
+    summary_df = pd.DataFrame(summary_data)
+    summary_df.to_csv(SUMMARY_FILE, index=False)
+    print(f"Summary is now in [{SUMMARY_FILE}]")
+
+
+
+if __name__ == "__main__":
+    main()
 
 
 
