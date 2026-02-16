@@ -8,6 +8,7 @@ OUTPUT_DIR = "data/processed/"
 # File name for the file that i am going to save.
 SUMMARY_FILE = os.path.join(OUTPUT_DIR,"analytics_summary.csv")
 TOP_PRICES_FILE = os.path.join(OUTPUT_DIR,"price_analysis.csv")
+REJECTED_FILE = os.path.join(OUTPUT_DIR, "rejected_products.csv")
 
 def main():
     print("Starting lab")
@@ -34,6 +35,15 @@ def main():
     # We need to do this now, because later we will drop the empty rows.
     count_missing_price = df['price'].isna().sum()
     count_total_products = len(df)
+
+    #BONUS - Rejected data
+    # before cleaningg, I would like to save the rows so i can look at them later.
+    print("saving the rejected data")
+    
+    # I identified some bad data as rows where price is missing or is negative
+    bad_data = df[df['price'].isna() | (df['price'] < 0)] # this will give me all the rows where price is either missing or negative.
+    bad_data.to_csv(REJECTED_FILE, index=False)
+    print(f"The data that was rejected is saved in {REJECTED_FILE}")
 
     # i can not analyise data that is missing price, so i will be deleting rows that are empty
     # Also removing negative prices, if there are any.
@@ -64,8 +74,7 @@ def main():
 
 
 
-if __name__ == "__main__":
-    main()
+
 
 
 
