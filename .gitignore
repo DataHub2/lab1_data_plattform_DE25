@@ -1,11 +1,11 @@
-# Python-genererade filer
+# Python-generated files
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
 
-# Virtuella miljöer
+# Virtual environment directories
 env/
 venv/
 .venv/
@@ -14,18 +14,18 @@ ENV/
 # Jupyter Notebook
 .ipynb_checkpoints/
 
-# IDE-specifika filer
+# IDE files
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# Operativsystem
+# Operationssystem
 .DS_Store
 Thumbs.db
 
-# Data (valfritt)
+# Data 
 data/raw/lab_1_-_csv.csv
 
-# Genererade output-filer
+# Generated files for output
 data/processed/*.csv

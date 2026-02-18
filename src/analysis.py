@@ -72,8 +72,17 @@ def main():
     summary_df.to_csv(SUMMARY_FILE, index=False)
     print(f"Summary is now in [{SUMMARY_FILE}]")
 
+    # Bonus - top 10 most expensive products
+    print("Calculating the top ten most expensive products")
+    #I am going to be sorting the price so it is descending. To find the most expensive ones.
+    top_10 = df_clean.sort_values(by="price", ascending=False).head(10)
+    top_10.to_csv(TOP_PRICES_FILE, index=False)
+    print(f"The top 10 most expensive list is now in {TOP_PRICES_FILE}")
 
 
+
+if __name__ == "__main__":
+    main()
 
 
 
