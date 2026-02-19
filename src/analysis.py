@@ -72,12 +72,32 @@ def main():
     summary_df.to_csv(SUMMARY_FILE, index=False)
     print(f"Summary is now in [{SUMMARY_FILE}]")
 
-    # Bonus - top 10 most expensive products
-    print("Calculating the top ten most expensive products")
-    #I am going to be sorting the price so it is descending. To find the most expensive ones.
-    top_10 = df_clean.sort_values(by="price", ascending=False).head(10)
-    top_10.to_csv(TOP_PRICES_FILE, index=False)
-    print(f"The top 10 most expensive list is now in {TOP_PRICES_FILE}")
+    print("Now calculating the price analysis ( the most expensive and deviating)")
+    
+    # Calculates the average price. 
+    mean_price = df_clean['price'].mean()
+
+    
+    # Here i create a new column called deviation, this shows the distance from the mean.
+    # I am going to use .abs() for  the deviation, beacuse i want to know how far the price is from the mean, regardless of whether it is above or below the mean.
+    df_clean['deviation'] = (df_clean['price'] - mean_price).abs()
+    
+    # The top 10 expensive
+    top_10_costing = df_clean.sort_values(by="price", ascending=False).head(10).copy()
+    top_10_costing['analysis_type'] = 'top 10 costing' # flags to identify in the csv file 
+
+    # 4. Top 10 most deviating products
+    top_10_deviating = df_clean.sort_values(by="deviation", ascending=False).head(10).copy()
+    top_10_deviating['analysis_type'] = 'top 10 deviating' # Flags to identify in CSV
+
+    # Here i am combining both into the df
+    combined_analysis = pd.concat([top_10_costing, top_10_deviating])
+
+    # 6. Save to the requested file
+    combined_analysis.to_csv(TOP_PRICES_FILE, index=False)
+    print(f"The price analysis (expensive and deviating) is now in {TOP_PRICES_FILE}")
+    
+
 
 
 
