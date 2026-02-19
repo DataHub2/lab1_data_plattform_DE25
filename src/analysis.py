@@ -56,8 +56,7 @@ def main():
     # Saving my results
     print("Calculating summary of the statistics")
     
-    # Here i am calculating the mean 
-    # Here i am calculating the mean 
+    # Here i am calculating the mean price, median price, total products and missing price count, and putting it in a dictionary so i can save it to a csv file. 
     summary_data = {
         "mean_price": [df_clean['price'].mean()], # average price
         "median_price": [df_clean['price'].median()], # median price
