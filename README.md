@@ -22,17 +22,21 @@ the pyhthon script `analysis.py` in `src` implements the following steps.
 Reads the semicolon as the separation in the CSV file using pandas.
 ### Transform: 
 * The process:
-    * Conversion of data types (strings to numerics)
+    * **Conversion of data types** (strings to numerics)
     
-    * Data Quality: Before i get to the cleaning, statistics on missing values are calculated to ensure accurate reporting.
+    * **Data Quality**: Before i get to the cleaning, statistics on missing values are calculated to ensure accurate reporting.
 
-    * Rejected data handling: Invalid rows (in other words-> negativ prices or missing values) are saved to another file, before i remove them from the dataset.
+    * **Deviation Analysis**: This calculates the absolut distance from the mean, so that i can accurately identidy the top 10 most deviating products.
 
-    * Load: Saves the cleaned summary, top 10 list, and rejected logs to the processed directory.
+
+
+    * **Rejected** data handling: Invalid rows (in other words-> negativ prices or missing values) are saved to another file, before i remove them from the dataset.
+
+    * **Load**: Saves the cleaned summary, top 10 list, and rejected logs to the processed directory.
 
 ### 3. Technologies
-* Pandas: I used Pandas for  high performance data manipulation and to analys. 
-* Theoreticaly: In a production setting, libararies like Psycopg3 would load data into the postgresql database. And Pydantic would be used for data validation.
+* **Pandas**: I used Pandas for  high performance data manipulation and to analys. 
+* **Theoreticaly**: In a production setting, libararies like Psycopg3 would load data into the postgresql database. And Pydantic would be used for data validation.
 
 The pipeline generates three key outputs in `data/processed/`:
 
